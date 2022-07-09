@@ -391,6 +391,7 @@ footer {
     filter: grayscale(1) invert(1);
 }
 
+.footer__logo--popper,
 .footer__link,
 .footer__copyright {
     color: white;
@@ -402,6 +403,24 @@ footer {
 
 .footer__link {
     padding: 0 8px;
+}
+
+.footer__logo--popper {
+    position: absolute;
+    right: 0%;
+    top: 15px;
+    font-weight: bold;
+    opacity: 0;
+    transition: 300ms ease;
+}
+
+.footer__anchor {
+    position: relative;
+}
+
+.footer__anchor:hover .footer__logo--popper {
+    transform: translateX(60px);
+    opacity: 1;
 }
 
 /* SMALL PHONES, TABLETS, LARGE SMARTPHONES */

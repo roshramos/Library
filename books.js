@@ -3,7 +3,7 @@ let books;
 async function renderBooks(filter) {
   const booksWrapper = document.querySelector(".books")
 
-  booksWrapper.classList += ' books__laoding'
+  booksWrapper.classList += ' books__loading'
 
   if (!books) {
     books = await getBooks();
@@ -25,7 +25,7 @@ async function renderBooks(filter) {
     );
   }
   else if (filter === 'HIGH_TO_LOW') {
-    books.sort ((a, b) => a.rating - b.rating);
+    books.sort ((a, b) => b.rating - a.rating);
   }
 
   const booksHtml = books
@@ -41,7 +41,7 @@ async function renderBooks(filter) {
           ${ratingsHTML(book.rating)}
         </div>
         <div class="book__price">
-          ${priceHTMl(book.originalPrice, book.salePrice)}
+          ${priceHTML(book.originalPrice, book.salePrice)}
         </div>
       </div>`
     }) 
@@ -50,7 +50,7 @@ async function renderBooks(filter) {
   booksWrapper.innerHTML = booksHtml
 }
 
-function priceHTMl(originalPrice, salePrice) {
+function priceHTML(originalPrice, salePrice) {
   if (!salePrice) {
     return `$${originalPrice.toFixed(2)}`
   }
@@ -58,33 +58,33 @@ function priceHTMl(originalPrice, salePrice) {
 }
 
 function ratingsHTML(rating) {
-  let  ratingHTML = ''
+  let  ratingHTML = ""
   for (let i = 0; i < Math.floor(rating); ++i) {
     ratingHTML += '<i class="fas fa-star"></i>'
   }
   if (!Number.isInteger(rating)) {
-    rating += '<i class="fas fa-star-half-alt"></i>'
+    ratingHTML += '<i class="fas fa-star-half-alt"></i>'
   }
   return ratingHTML
 }
   
 function filterBooks(event) {
-    renderBooks (event.target.value)
+    renderBooks (event.target.value);
 }
   
 setTimeout(() => {
-    renderBooks ();
-})
+    renderBooks();
+});
 
 // FAKE DATA
 function getBooks() {
   return new Promise((resolve) => {
-     setTimeout(() => {
+    setTimeout(() => {
       resolve([
         {
           id: 1,
           title: "Crack the Coding Interview",
-                    url: "assets/crack the coding interview.png",
+          url: "assets/crack the coding interview.png",
           originalPrice: 49.95,
           salePrice: 14.95,
           rating: 4.5,
@@ -151,7 +151,7 @@ function getBooks() {
           url: "assets/book-6.jpeg",
           originalPrice: 35,
           salePrice: null,
-          rating: 4,
+          rating: 2,
         },
         {
           id: 10,
@@ -169,7 +169,7 @@ function getBooks() {
           salePrice: null,
           rating: 4.5,
         },
-      ])
+      ]);
     }, 1000);
   });
 }
